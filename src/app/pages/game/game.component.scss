@@ -9,25 +9,25 @@
 .wrapper {
   display: grid;
   grid-gap: 10px;
-  margin: 0 auto 20px auto;
+  margin: 0 auto 20px;
 }
 
 .plate {
   width: 100%;
-  aspect-ratio: 1;
-  border-radius: $border-radius-1;
   background: $background-1;
-  transition: .2s ease-in background, .2s ease-in transform;
+  border-radius: $border-radius-1;
   cursor: pointer;
+  transition: .2s ease-in background, .2s ease-in transform;
   pointer-events: none;
+  aspect-ratio: 1;
 
   &:hover {
     transform: scale(1.05);
   }
 
   &.pending {
-    pointer-events: all;
     background: $background-6;
+    pointer-events: all;
   }
 
   &.computer {
@@ -41,10 +41,12 @@
 
 .bottom-bar {
   align-items: stretch;
+
   @include grid(1fr 1fr 1fr, 15px);
 
   &__score {
     margin: 0;
+
     @include text(18px, 400, 21px);
     @include flex(center, flex-start);
   }
@@ -53,7 +55,5 @@
     width: 100%;
   }
 
-  &__start {
-
-  }
+  &__start {}
 }

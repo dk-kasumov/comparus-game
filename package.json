@@ -11,7 +11,8 @@
     "lint": "ng lint --fix"
   },
   "lint-staged": {
-    "src/**/*.ts": ["ng-lint-staged lint --fix"]
+    "*.ts": [ "ng-lint-staged lint --fix --", "git add ."],
+    "*.{css,scss}": ["stylelint --fix", "git add ."]
   },
   "private": true,
   "engines": {

@@ -87,7 +87,7 @@ export class GameComponent implements OnInit {
         }),
         takeUntilDestroyed(this.destroyRef)
       )
-      .subscribe(() => {});
+      .subscribe(null);
   }
 
   private continueGame(): void {
