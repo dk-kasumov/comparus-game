@@ -1,11 +1,13 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, OnInit} from '@angular/core';
-import {GameService} from '@/app/@services/game.service';
 import {CommonModule} from '@angular/common';
-import {ROWS} from '@/app/@constants/common.constants';
-import {interval, startWith, Subscription, tap} from 'rxjs';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, OnInit} from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {Plate, WinnerEnum} from '@/app/@models/plate.models';
 import {FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
+
+import {interval, startWith, Subscription, tap} from 'rxjs';
+
+import {ROWS} from '@/app/@constants/common.constants';
+import {Plate, WinnerEnum} from '@/app/@models/plate.models';
+import {GameService} from '@/app/@services/game.service';
 import {isNumber} from '@/app/@utils/numbers/is-number.util';
 
 @Component({
