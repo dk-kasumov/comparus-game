@@ -1,0 +1,22 @@
+{
+  "extends": ["stylelint-config-standard-scss", "stylelint-config-rational-order"],
+  "plugins": [
+    "stylelint-order",
+    "stylelint-config-rational-order/plugin"
+  ],
+  "rules": {
+    "indentation": [2],
+    "color-hex-case": "lower",
+    "no-empty-source": null,
+    "selector-pseudo-element-no-unknown": null,
+    "selector-class-pattern": null,
+    "no-duplicate-selectors": null,
+    "no-descending-specificity": null,
+    "selector-type-no-unknown": null,
+    "block-no-empty": null,
+    "selector-pseudo-class-no-unknown": null,
+    "scss/dollar-variable-pattern": null,
+    "scss/double-slash-comment-whitespace-inside": null,
+    "scss/comment-no-empty": null
+  }
+}

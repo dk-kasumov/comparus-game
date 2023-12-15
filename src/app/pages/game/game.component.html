@@ -1,0 +1,27 @@
+<div class="container-sm wrapper" [ngStyle]="{'grid-template-columns': gridTemplateColumns, 'grid-template-rows': gridTemplateRows}">
+    <button
+      *ngFor="let plate of gameService.plates; trackBy: trackByFn"
+      class="plate"
+      type="button"
+      aria-label="Plate"
+      (click)="onUserActivatePlate(plate)"
+      [ngClass]="{
+        user: plate.winner === winnerEnum.USER,
+        pending: plate.winner === winnerEnum.PENDING,
+        computer: plate.winner === winnerEnum.COMPUTER
+      }"
+    ></button>
+</div>
+
+<div class="bottom-bar container-sm">
+    <p class="bottom-bar__score" *ngIf="gameService.score$ | async as score">
+        {{score.user}} / {{score.computer}}
+    </p>
+
+    <div class="form-control">
+        <input class="bottom-bar__input" type="number" placeholder="ms" [formControl]="intervalControl" (keydown.enter)="onStartGame()" />
+        <span class="error-message" *ngIf="intervalControl.hasError('required')">Required field</span>
+    </div>
+
+    <button class="bottom-bar__start base-button" type="button" (click)="onStartGame()">Start</button>
+</div>

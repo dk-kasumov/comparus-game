@@ -1,0 +1,16 @@
+@import 'variables';
+@import 'mixins';
+
+:host {
+  display: block;
+  padding: 15px 0;
+  background: $background-2;
+}
+
+.title {
+  margin: 0;
+  text-align: center;
+  font-size: 32px;
+  color: $text-color-1;
+  @include text(32px, 400, 36px);
+}

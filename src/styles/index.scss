@@ -1,0 +1,16 @@
+@import 'normalize.css/normalize.css';
+@import "mixins";
+@import "global";
+@import "forms";
+
+.container {
+  max-width: 1440px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
+.container-sm {
+  max-width: 760px;
+  padding: 0 20px;
+  margin: 0 auto;
+}

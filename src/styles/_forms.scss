@@ -1,0 +1,23 @@
+@import 'mixins';
+@import 'variables';
+
+.form-control {
+  height: 64px;
+}
+
+.error-message {
+  display: none;
+  color: $text-color-3;
+  margin: 4px 0 0 0;
+  @include text(14px, 400, 16px);
+}
+
+.error-message + .error-message {
+  display: none;
+}
+
+input.ng-touched.ng-invalid {
+  & + .error-message {
+    display: block;
+  }
+}
