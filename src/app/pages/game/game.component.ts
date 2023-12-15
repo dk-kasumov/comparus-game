@@ -5,7 +5,7 @@ import {FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
 
 import {interval, startWith, Subscription, tap} from 'rxjs';
 
-import {ROWS} from '@/app/@constants/common.constants';
+import {COLS, ROWS} from '@/app/@constants/common.constants';
 import {Plate, WinnerEnum} from '@/app/@models/plate.models';
 import {GameService} from '@/app/@services/game.service';
 import {isNumber} from '@/app/@utils/numbers/is-number.util';
@@ -39,7 +39,7 @@ export class GameComponent implements OnInit {
   }
 
   public get gridTemplateColumns(): string {
-    return `repeat(${ROWS}, 1fr)`;
+    return `repeat(${COLS}, 1fr)`;
   }
 
   public ngOnInit(): void {
