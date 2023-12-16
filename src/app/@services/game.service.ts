@@ -56,7 +56,7 @@ export class GameService {
     const platesCopy = structuredClone(this._plates$.value);
     const scoreCopy = structuredClone(this._score$.value);
 
-    platesCopy.splice(plate.id, 1, {...plate, winner});
+    platesCopy.splice(plate.index, 1, {...plate, winner});
     scoreCopy.user += 1;
 
     this._plates$.next(platesCopy);

@@ -1,6 +1,6 @@
 export class Plate {
   constructor(
-    public id: number,
+    public index: number,
     public winner: WinnerEnum | null
   ) {}
 }

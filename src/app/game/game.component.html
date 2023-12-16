@@ -1,6 +1,6 @@
 <div class="container-sm wrapper" [ngStyle]="{'grid-template-columns': gridTemplateColumns, 'grid-template-rows': gridTemplateRows}">
     <button
-      *ngFor="let plate of gameService.plates$ | async; trackByProp: 'id'"
+      *ngFor="let plate of gameService.plates$ | async; trackByIndex"
       class="plate"
       type="button"
       aria-label="Plate"

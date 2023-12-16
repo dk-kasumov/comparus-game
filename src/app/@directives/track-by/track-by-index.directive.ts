@@ -6,9 +6,9 @@ import {Directive, inject, Input, NgIterable} from '@angular/core';
   standalone: true
 })
 export class NgForTrackByIndexDirective<T> {
-  @Input() ngForOf!: NgIterable<T>;
+  @Input() ngForOf!: NgIterable<T> | null;
 
-  private readonly ngFor = inject(NgForOf<T>, {self: true});
+  private readonly ngFor = inject(NgForOf<T | null>, {self: true});
 
   constructor() {
     this.ngFor.ngForTrackBy = (index: number) => index;

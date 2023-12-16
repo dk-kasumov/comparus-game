@@ -7,7 +7,7 @@ import {DigitOnlyModule} from '@uiowa/digit-only';
 import {interval, startWith, Subscription, tap} from 'rxjs';
 
 import {COLS, ROWS} from '@/app/@constants/common.constants';
-import {NgForTrackByPropDirective} from '@/app/@directives/track-by/track-by-prop.directive';
+import {NgForTrackByIndexDirective} from '@/app/@directives/track-by/track-by-index.directive';
 import {Plate, WinnerEnum} from '@/app/@models/game.models';
 import {GameService} from '@/app/@services/game.service';
 import {AlertComponent} from '@/app/@shared/alert/alert.component';
@@ -19,7 +19,7 @@ import {gameConfig} from '@/app/game/game.config';
   standalone: true,
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss',
-  imports: [CommonModule, ReactiveFormsModule, AlertComponent, DigitOnlyModule, NgForTrackByPropDirective],
+  imports: [CommonModule, ReactiveFormsModule, AlertComponent, DigitOnlyModule, NgForTrackByIndexDirective],
   providers: [GameService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
