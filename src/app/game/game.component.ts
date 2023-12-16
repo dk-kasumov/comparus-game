@@ -4,7 +4,7 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
 import {DigitOnlyModule} from '@uiowa/digit-only';
 
-import {interval, startWith, Subscription, tap} from 'rxjs';
+import {interval, startWith, Subscription} from 'rxjs';
 
 import {COLS, ROWS} from '@/app/@constants/game.constants';
 import {NgForTrackByIndexDirective} from '@/app/@directives/track-by/track-by-index.directive';
@@ -82,7 +82,7 @@ export class GameComponent implements OnInit {
   }
 
   public onUserActivatePlate(plate: Plate): void {
-    this.gameService.setWinnerForPlate(plate, WinnerEnum.USER);
+    this.gameService.setWinnerOfPlate(plate, WinnerEnum.USER);
 
     if (this.gameService.isWinnerExists) return;
 
@@ -93,15 +93,11 @@ export class GameComponent implements OnInit {
     this.intervalSub?.unsubscribe();
 
     this.intervalSub = interval(this.currentInterval)
-      .pipe(
-        startWith(0),
-        tap(() => {
-          this.gameService.setComputerWinnerForPendingPlates();
-          this.gameService.activateRandomPlate();
-        }),
-        takeUntilDestroyed(this.destroyRef)
-      )
-      .subscribe();
+      .pipe(startWith(0), takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        this.gameService.setComputerWinnerOfPendingPlates();
+        this.gameService.activateRandomPlate();
+      });
   }
 
   private showAlert(title: string, text: string): void {

@@ -37,7 +37,7 @@ export class GameService {
       .map((_, index) => new Plate(index, null));
   }
 
-  public setComputerWinnerForPendingPlates(): void {
+  public setComputerWinnerOfPendingPlates(): void {
     const scoreCopy = structuredClone(this._score$.value);
     const platesCopy = structuredClone(this._plates$.value);
 
@@ -52,7 +52,7 @@ export class GameService {
     this._plates$.next(platesCopy);
   }
 
-  public setWinnerForPlate(plate: Plate, winner: WinnerEnum): void {
+  public setWinnerOfPlate(plate: Plate, winner: WinnerEnum): void {
     const platesCopy = structuredClone(this._plates$.value);
     const scoreCopy = structuredClone(this._score$.value);
 
