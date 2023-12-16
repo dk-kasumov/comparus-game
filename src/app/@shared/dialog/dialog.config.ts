@@ -1,4 +1,7 @@
+interface BaseDialogData {
+  title: string;
+}
+
 export class DialogConfig<T = any> {
-  data?: T;
-  title!: string;
+  data!: T & BaseDialogData;
 }

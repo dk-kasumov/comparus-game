@@ -112,7 +112,7 @@ export class GameComponent implements OnInit {
   }
 
   private showAlert(title: string, text: string): void {
-    const ref = this.dialogService.open(AlertComponent, {title, data: {text}});
+    const ref = this.dialogService.open(AlertComponent, {data: {text, title}});
 
     ref.afterClosed$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
       this.gameService.resetState();
