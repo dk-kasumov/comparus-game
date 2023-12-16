@@ -17,6 +17,18 @@ export class GameService {
   public readonly plates$ = this._plates$.asObservable();
   public readonly score$ = this._score$.asObservable();
 
+  public get isWinnerExists(): boolean {
+    return Object.values(this._score$.value).some(value => value >= TARGET_SCORE);
+  }
+
+  public get isUserWinner(): boolean {
+    return this._score$.value.user >= TARGET_SCORE;
+  }
+
+  public get isComputerWinner(): boolean {
+    return this._score$.value.computer >= TARGET_SCORE;
+  }
+
   public resetState(): void {
     this._plates$.next(this.generatePlates());
     this._score$.next({user: 0, computer: 0});
@@ -28,18 +40,6 @@ export class GameService {
       .map((_, index) => {
         return new Plate(index, null);
       });
-  }
-
-  public get isWinnerExists(): boolean {
-    return Object.values(this._score$.value).some(value => value >= TARGET_SCORE);
-  }
-
-  public get isUserWinner(): boolean {
-    return this._score$.value.user >= TARGET_SCORE;
-  }
-
-  public get isComputerWinner(): boolean {
-    return this._score$.value.computer >= TARGET_SCORE;
   }
 
   public setComputerWinnerForPendingPlates(): void {
@@ -58,11 +58,8 @@ export class GameService {
   }
 
   public activatePlateByUser(plate: Plate): void {
-    plate.winner = WinnerEnum.USER;
-
     const platesCopy = structuredClone(this._plates$.value);
-
-    platesCopy.splice(plate.id, 1, plate);
+    platesCopy.splice(plate.id, 1, {...plate, winner: WinnerEnum.USER});
 
     const score = structuredClone(this._score$.value);
     score.user += 1;
