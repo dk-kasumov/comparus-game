@@ -6,7 +6,7 @@ import {DigitOnlyModule} from '@uiowa/digit-only';
 
 import {interval, startWith, Subscription, tap} from 'rxjs';
 
-import {COLS, ROWS} from '@/app/@constants/common.constants';
+import {COLS, ROWS} from '@/app/@constants/game.constants';
 import {NgForTrackByIndexDirective} from '@/app/@directives/track-by/track-by-index.directive';
 import {Plate, WinnerEnum} from '@/app/@models/game.models';
 import {GameService} from '@/app/@services/game.service';

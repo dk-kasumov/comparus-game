@@ -3,7 +3,6 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  ComponentFactoryResolver,
   ComponentRef,
   inject,
   OnDestroy,
@@ -26,7 +25,6 @@ import {InsertionDirective} from '@/app/@shared/dialog/directives/insertion.dire
 export class DialogComponent implements AfterViewInit, OnDestroy {
   @ViewChild(InsertionDirective) private readonly insertionPoint!: InsertionDirective;
 
-  private readonly componentFactoryResolver = inject(ComponentFactoryResolver);
   private readonly cdr = inject(ChangeDetectorRef);
   public readonly config = inject(DialogConfig);
   public readonly dialogRef = inject(DialogRef);
@@ -39,16 +37,15 @@ export class DialogComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     this.loadChildComponent(this.childComponentType);
-    this.cdr.detectChanges();
   }
 
-  loadChildComponent(componentType: Type<any>) {
-    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(componentType);
-
+  private loadChildComponent(componentType: Type<any>): void {
     const viewContainerRef = this.insertionPoint.viewContainerRef;
     viewContainerRef.clear();
 
-    this.componentRef = viewContainerRef.createComponent(componentFactory);
+    this.componentRef = viewContainerRef.createComponent(componentType);
+
+    this.cdr.detectChanges();
   }
 
   ngOnDestroy() {
