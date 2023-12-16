@@ -1,11 +1,11 @@
-import {AsyncPipe, NgIf, NgOptimizedImage} from '@angular/common';
+import {NgOptimizedImage} from '@angular/common';
 import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-score',
   standalone: true,
   templateUrl: './score.component.html',
-  imports: [AsyncPipe, NgIf, NgOptimizedImage],
+  imports: [NgOptimizedImage],
   styleUrl: './score.component.scss'
 })
 export class ScoreComponent {
