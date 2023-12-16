@@ -1,29 +1,41 @@
-<div class="container-sm wrapper" [ngStyle]="{'grid-template-columns': gridTemplateColumns, 'grid-template-rows': gridTemplateRows}">
-    <button
-      *ngFor="let plate of gameService.plates$ | async; trackByIndex"
-      class="plate"
-      type="button"
-      aria-label="Plate"
-      (click)="onUserActivatePlate(plate)"
-      [ngClass]="{
-        user: plate.winner === winnerEnum.USER,
-        pending: plate.winner === winnerEnum.PENDING,
-        computer: plate.winner === winnerEnum.COMPUTER
-      }"
-    ></button>
+<div
+  class="container-sm wrapper"
+  [ngStyle]="{'grid-template-columns': gridTemplateColumns, 'grid-template-rows': gridTemplateRows}"
+>
+  <button
+    *ngFor="let plate of gameService.plates$ | async; trackByIndex"
+    class="plate"
+    type="button"
+    aria-label="Plate"
+    (click)="onUserActivatePlate(plate)"
+    [ngClass]="{
+      user: plate.winner === winnerEnum.USER,
+      pending: plate.winner === winnerEnum.PENDING,
+      computer: plate.winner === winnerEnum.COMPUTER
+    }"
+  ></button>
 </div>
 
 <div class="bottom-bar container-sm">
-    <p class="bottom-bar__score" *ngIf="gameService.score$ | async as score">
-        {{score.user}} / {{score.computer}}
-    </p>
+  <app-score
+    *ngLet="gameService.score$ | async as score"
+    [userScore]="score!.user"
+    [computerScore]="score!.computer"
+  />
 
-    <div class="form-control">
-        <input digitOnly class="bottom-bar__input" type="number" placeholder="ms" [formControl]="intervalControl" (keydown.enter)="onStartGame()" />
-        <span class="error-message" *ngIf="intervalControl.hasError('required')">Required field</span>
-        <span class="error-message" *ngIf="intervalControl.hasError('min')">Min interval is {{MIN_INTERVAL}}ms</span>
-        <span class="error-message" *ngIf="intervalControl.hasError('max')">Max interval is {{MAX_INTERVAL}}ms</span>
-    </div>
+  <div class="form-control">
+    <input
+      digitOnly
+      class="bottom-bar__input"
+      type="number"
+      placeholder="ms"
+      [formControl]="intervalControl"
+      (keydown.enter)="onStartGame()"
+    />
+    <span class="error-message" *ngIf="intervalControl.hasError('required')">Required field</span>
+    <span class="error-message" *ngIf="intervalControl.hasError('min')">Min interval is {{ MIN_INTERVAL }}ms</span>
+    <span class="error-message" *ngIf="intervalControl.hasError('max')">Max interval is {{ MAX_INTERVAL }}ms</span>
+  </div>
 
-    <button class="bottom-bar__start base-button" type="button" (click)="onStartGame()">Start</button>
+  <button class="bottom-bar__start base-button" type="button" (click)="onStartGame()">Start</button>
 </div>

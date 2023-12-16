@@ -44,13 +44,6 @@
 
   @include grid(1fr 1fr 1fr, 15px);
 
-  &__score {
-    margin: 0;
-
-    @include text(18px, 400, 21px);
-    @include flex(center, flex-start);
-  }
-
   &__input {
     width: 100%;
   }

@@ -1,4 +1,4 @@
-import {CommonModule} from '@angular/common';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 import {ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit} from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
@@ -7,19 +7,30 @@ import {DigitOnlyModule} from '@uiowa/digit-only';
 import {interval, startWith, Subscription} from 'rxjs';
 
 import {COLS, ROWS} from '@/app/@constants/game.constants';
+import {LetDirective} from '@/app/@directives/let.directive';
 import {NgForTrackByIndexDirective} from '@/app/@directives/track-by/track-by-index.directive';
 import {Plate, WinnerEnum} from '@/app/@models/game.models';
 import {GameService} from '@/app/@services/game.service';
 import {AlertComponent} from '@/app/@shared/alert/alert.component';
 import {DialogService} from '@/app/@shared/dialog/services/dialog.service';
 import {gameConfig} from '@/app/game/game.config';
+import {ScoreComponent} from '@/app/game/score/score.component';
 
 @Component({
   selector: 'app-game',
   standalone: true,
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss',
-  imports: [CommonModule, ReactiveFormsModule, AlertComponent, DigitOnlyModule, NgForTrackByIndexDirective],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    AlertComponent,
+    DigitOnlyModule,
+    NgForTrackByIndexDirective,
+    NgOptimizedImage,
+    ScoreComponent,
+    LetDirective
+  ],
   providers: [GameService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
