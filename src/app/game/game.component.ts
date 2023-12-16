@@ -13,7 +13,7 @@ import {GameService} from '@/app/@services/game.service';
 import {AlertComponent} from '@/app/@shared/alert/alert.component';
 import {DialogService} from '@/app/@shared/dialog/services/dialog.service';
 import {isNumber} from '@/app/@utils/numbers/is-number.util';
-import {gameConfig} from '@/app/pages/game/game.config';
+import {gameConfig} from '@/app/game/game.config';
 
 @Component({
   selector: 'app-game',
