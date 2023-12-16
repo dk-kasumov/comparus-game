@@ -21,7 +21,8 @@
     <div class="form-control">
         <input digitOnly class="bottom-bar__input" type="number" placeholder="ms" [formControl]="intervalControl" (keydown.enter)="onStartGame()" />
         <span class="error-message" *ngIf="intervalControl.hasError('required')">Required field</span>
-        <span class="error-message" *ngIf="intervalControl.hasError('min')">Min value is 200ms</span>
+        <span class="error-message" *ngIf="intervalControl.hasError('min')">Min interval is {{MIN_INTERVAL}}ms</span>
+        <span class="error-message" *ngIf="intervalControl.hasError('max')">Max interval is {{MAX_INTERVAL}}ms</span>
     </div>
 
     <button class="bottom-bar__start base-button" type="button" (click)="onStartGame()">Start</button>

@@ -28,16 +28,20 @@ export class GameComponent implements OnInit {
   public readonly gameService = inject(GameService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly dialogService = inject(DialogService);
+
   public readonly winnerEnum = WinnerEnum;
 
-  public readonly intervalControl = new FormControl(null, [Validators.required, Validators.min(200)]);
+  public readonly MIN_INTERVAL = 200;
+  public readonly MAX_INTERVAL = 5_000;
+
+  public readonly intervalControl = new FormControl(null, [
+    Validators.required,
+    Validators.min(this.MIN_INTERVAL),
+    Validators.max(this.MAX_INTERVAL)
+  ]);
+
   public currentInterval: number = 0;
-
   private intervalSub!: Subscription;
-
-  trackByFn(index: number) {
-    return index;
-  }
 
   public get gridTemplateRows(): string {
     return `repeat(${ROWS}, 1fr)`;
