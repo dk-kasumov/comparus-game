@@ -7,6 +7,7 @@ import {DigitOnlyModule} from '@uiowa/digit-only';
 import {interval, startWith, Subscription, tap} from 'rxjs';
 
 import {COLS, ROWS} from '@/app/@constants/common.constants';
+import {NgForTrackByPropDirective} from '@/app/@directives/track-by/track-by-prop.directive';
 import {Plate, WinnerEnum} from '@/app/@models/plate.models';
 import {GameService} from '@/app/@services/game.service';
 import {AlertComponent} from '@/app/@shared/alert/alert.component';
@@ -19,7 +20,7 @@ import {gameConfig} from '@/app/pages/game/game.config';
   standalone: true,
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss',
-  imports: [CommonModule, ReactiveFormsModule, AlertComponent, DigitOnlyModule],
+  imports: [CommonModule, ReactiveFormsModule, AlertComponent, DigitOnlyModule, NgForTrackByPropDirective],
   providers: [GameService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -98,7 +99,7 @@ export class GameComponent implements OnInit {
         }),
         takeUntilDestroyed(this.destroyRef)
       )
-      .subscribe(null);
+      .subscribe();
   }
 
   private showAlert(title: string, text: string): void {

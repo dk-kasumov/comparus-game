@@ -49,7 +49,7 @@ module.exports = {
           'error',
           {
             type: 'attribute',
-            prefix: 'app',
+            prefix: ['app', 'ng'],
             style: 'camelCase'
           }
         ],
