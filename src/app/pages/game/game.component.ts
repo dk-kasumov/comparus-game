@@ -2,6 +2,7 @@ import {CommonModule} from '@angular/common';
 import {ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit} from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
+import {DigitOnlyModule} from '@uiowa/digit-only';
 
 import {interval, startWith, Subscription, tap} from 'rxjs';
 
@@ -18,7 +19,7 @@ import {gameConfig} from '@/app/pages/game/game.config';
   standalone: true,
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss',
-  imports: [CommonModule, ReactiveFormsModule, AlertComponent],
+  imports: [CommonModule, ReactiveFormsModule, AlertComponent, DigitOnlyModule],
   providers: [GameService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -28,7 +29,7 @@ export class GameComponent implements OnInit {
   private readonly dialogService = inject(DialogService);
   public readonly winnerEnum = WinnerEnum;
 
-  public readonly intervalControl = new FormControl(null, [Validators.required]);
+  public readonly intervalControl = new FormControl(null, [Validators.required, Validators.min(200)]);
   public currentInterval: number = 0;
 
   private intervalSub!: Subscription;
