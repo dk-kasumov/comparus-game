@@ -5,6 +5,13 @@ export class Plate {
   ) {}
 }
 
+export class Score {
+  constructor(
+    public user: number,
+    public computer: number
+  ) {}
+}
+
 export enum WinnerEnum {
   USER = 'USER',
   COMPUTER = 'COMPUTER',

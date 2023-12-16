@@ -8,11 +8,10 @@ import {interval, startWith, Subscription, tap} from 'rxjs';
 
 import {COLS, ROWS} from '@/app/@constants/common.constants';
 import {NgForTrackByPropDirective} from '@/app/@directives/track-by/track-by-prop.directive';
-import {Plate, WinnerEnum} from '@/app/@models/plate.models';
+import {Plate, WinnerEnum} from '@/app/@models/game.models';
 import {GameService} from '@/app/@services/game.service';
 import {AlertComponent} from '@/app/@shared/alert/alert.component';
 import {DialogService} from '@/app/@shared/dialog/services/dialog.service';
-import {isNumber} from '@/app/@utils/numbers/is-number.util';
 import {gameConfig} from '@/app/game/game.config';
 
 @Component({
@@ -59,7 +58,7 @@ export class GameComponent implements OnInit {
     this.gameService.score$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
       if (!this.gameService.isWinnerExists) return;
 
-      this.intervalSub.unsubscribe();
+      this.intervalSub?.unsubscribe();
 
       if (this.gameService.isUserWinner) {
         this.showAlert(gameConfig.userWonAlert.title, gameConfig.userWonAlert.text);
@@ -74,11 +73,10 @@ export class GameComponent implements OnInit {
   }
 
   public onStartGame(): void {
-    if (this.intervalControl.invalid && isNumber(this.intervalControl.value)) return;
+    if (this.intervalControl.invalid) return;
 
     this.currentInterval = this.intervalControl.value!;
 
-    this.intervalSub?.unsubscribe();
     this.gameService.resetState();
     this.initializeGame();
   }
@@ -86,14 +84,14 @@ export class GameComponent implements OnInit {
   public onUserActivatePlate(plate: Plate): void {
     this.gameService.activatePlateByUser(plate);
 
-    if (this.gameService.isWinnerExists) {
-      return;
-    }
+    if (this.gameService.isWinnerExists) return;
 
-    this.continueGame();
+    this.initializeGame();
   }
 
   private initializeGame(): void {
+    this.intervalSub?.unsubscribe();
+
     this.intervalSub = interval(this.currentInterval)
       .pipe(
         startWith(0),
@@ -112,10 +110,5 @@ export class GameComponent implements OnInit {
     ref.afterClosed.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
       this.gameService.resetState();
     });
-  }
-
-  private continueGame(): void {
-    this.intervalSub.unsubscribe();
-    this.initializeGame();
   }
 }

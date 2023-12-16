@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 
 import {TARGET_SCORE, TOTAL_PLATES} from '@/app/@constants/common.constants';
-import {Plate, WinnerEnum} from '@/app/@models/plate.models';
+import {Plate, WinnerEnum} from '@/app/@models/game.models';
 import {getRandomNumber} from '@/app/@utils/numbers/get-random-number.util';
 
 @Injectable()
