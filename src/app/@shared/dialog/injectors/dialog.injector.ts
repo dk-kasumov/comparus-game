@@ -1,4 +1,4 @@
-import {InjectFlags, InjectionToken, Injector, Type} from '@angular/core';
+import {Injector} from '@angular/core';
 
 export class DialogInjector implements Injector {
   constructor(
@@ -6,9 +6,7 @@ export class DialogInjector implements Injector {
     private _additionalTokens: WeakMap<any, any>
   ) {}
 
-  public get<T>(token: Type<T> | InjectionToken<T>, notFoundValue?: T, flags?: InjectFlags): T;
-  public get<T>(token: any, notFoundValue?: any): T;
-  public get(token: any, notFoundValue?: any) {
+  public get<T>(token: any, notFoundValue?: any): T {
     const value = this._additionalTokens.get(token);
 
     if (value) return value;

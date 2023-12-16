@@ -10,8 +10,6 @@ import {
   ViewChild
 } from '@angular/core';
 
-import {Subject} from 'rxjs';
-
 import {DialogConfig} from '@/app/@shared/dialog/dialog.config';
 import {DialogRef} from '@/app/@shared/dialog/dialog.ref';
 import {InsertionDirective} from '@/app/@shared/dialog/directives/insertion.directive';
@@ -29,13 +27,10 @@ export class DialogComponent implements AfterViewInit, OnDestroy {
   public readonly config = inject(DialogConfig);
   public readonly dialogRef = inject(DialogRef);
 
-  private readonly _onClose = new Subject<never>();
-
   public componentRef!: ComponentRef<any>;
   public childComponentType!: Type<any>;
-  public onClose = this._onClose.asObservable();
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.loadChildComponent(this.childComponentType);
   }
 
@@ -48,7 +43,7 @@ export class DialogComponent implements AfterViewInit, OnDestroy {
     this.cdr.detectChanges();
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     if (this.componentRef) this.componentRef.destroy();
   }
 }

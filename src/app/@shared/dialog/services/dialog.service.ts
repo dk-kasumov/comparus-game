@@ -53,10 +53,6 @@ export class DialogService {
 
     this.dialogComponentRef = componentRef;
 
-    this.dialogComponentRef.instance.onClose.subscribe(() => {
-      this.removeDialogComponentFromBody();
-    });
-
     return dialogRef;
   }
 
