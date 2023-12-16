@@ -1,5 +1,5 @@
 import {CommonModule} from '@angular/common';
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit} from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
 
@@ -24,7 +24,6 @@ import {gameConfig} from '@/app/pages/game/game.config';
 })
 export class GameComponent implements OnInit {
   public readonly gameService = inject(GameService);
-  private readonly cdr = inject(ChangeDetectorRef);
   private readonly destroyRef = inject(DestroyRef);
   private readonly dialogService = inject(DialogService);
   public readonly winnerEnum = WinnerEnum;
@@ -51,10 +50,6 @@ export class GameComponent implements OnInit {
   }
 
   private initializeListeners(): void {
-    this.gameService.changeDetectorNotifier$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-      this.cdr.detectChanges();
-    });
-
     this.gameService.score$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
       if (!this.gameService.isWinnerExists) return;
 

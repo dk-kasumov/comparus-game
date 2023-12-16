@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 
-import {BehaviorSubject, Subject} from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 
 import {TARGET_SCORE, TOTAL_PLATES} from '@/app/@constants/common.constants';
 import {Plate, WinnerEnum} from '@/app/@models/plate.models';
@@ -8,18 +8,14 @@ import {getRandomNumber} from '@/app/@utils/numbers/get-random-number.util';
 
 @Injectable()
 export class GameService {
-  public plates: Plate[] = this.generatePlates();
+  public plates$: BehaviorSubject<Plate[]> = new BehaviorSubject(this.generatePlates());
   public readonly score$: BehaviorSubject<Record<'user' | 'computer', number>> = new BehaviorSubject({
     user: 0,
     computer: 0
   });
 
-  private readonly changeDetectorNotifier$$ = new Subject<void>();
-
-  public readonly changeDetectorNotifier$ = this.changeDetectorNotifier$$.asObservable();
-
   public resetState(): void {
-    this.plates = this.generatePlates();
+    this.plates$.next(this.generatePlates());
     this.score$.next({user: 0, computer: 0});
   }
 
@@ -44,39 +40,42 @@ export class GameService {
   }
 
   public setComputerWinnerForPendingPlates(): void {
-    const score = this.score$.value;
+    const scoreCopy = structuredClone(this.score$.value);
+    const platesCopy = structuredClone(this.plates$.value);
 
-    for (const plate of this.plates) {
+    for (const plate of platesCopy) {
       if (plate.winner !== WinnerEnum.PENDING) continue;
 
-      score.computer += 1;
+      scoreCopy.computer += 1;
       plate.winner = WinnerEnum.COMPUTER;
     }
 
-    this.score$.next(score);
-    this.changeDetectorNotifier$$.next();
+    this.score$.next(scoreCopy);
+    this.plates$.next(platesCopy);
   }
 
   public activatePlateByUser(plate: Plate): void {
     plate.winner = WinnerEnum.USER;
 
-    const platesCopy = this.plates.slice();
-    platesCopy.splice(plate.id, 1, plate);
-    this.plates = platesCopy;
+    const platesCopy = structuredClone(this.plates$.value);
 
-    const score = this.score$.value;
+    platesCopy.splice(plate.id, 1, plate);
+
+    const score = structuredClone(this.score$.value);
     score.user += 1;
 
+    this.plates$.next(platesCopy);
     this.score$.next(score);
-    this.changeDetectorNotifier$$.next();
   }
 
   public activateRandomPlate(): void {
-    const platesWithUndefinedWinner = this.plates.filter(plate => !plate.winner);
+    const platesCopy = structuredClone(this.plates$.value);
+
+    const platesWithUndefinedWinner = platesCopy.filter(plate => !plate.winner);
     const randomIndex = getRandomNumber(0, platesWithUndefinedWinner.length);
     const randomPlate = platesWithUndefinedWinner[randomIndex];
     randomPlate.winner = WinnerEnum.PENDING;
 
-    this.changeDetectorNotifier$$.next();
+    this.plates$.next(platesCopy);
   }
 }
