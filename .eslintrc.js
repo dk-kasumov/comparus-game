@@ -60,7 +60,8 @@ module.exports = {
             prefix: 'app',
             style: 'kebab-case'
           }
-        ]
+        ],
+        '@typescript-eslint/no-explicit-any': 'off'
       }
     },
     {

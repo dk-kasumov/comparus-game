@@ -1,8 +1,10 @@
 import {Injectable} from '@angular/core';
+
+import {BehaviorSubject, Subject} from 'rxjs';
+
 import {TARGET_SCORE, TOTAL_PLATES} from '@/app/@constants/common.constants';
 import {Plate, WinnerEnum} from '@/app/@models/plate.models';
 import {getRandomNumber} from '@/app/@utils/numbers/get-random-number.util';
-import {BehaviorSubject, Subject} from 'rxjs';
 
 @Injectable()
 export class GameService {
@@ -31,6 +33,14 @@ export class GameService {
 
   public get isWinnerExists(): boolean {
     return Object.values(this.score$.value).some(value => value >= TARGET_SCORE);
+  }
+
+  public get isUserWinner(): boolean {
+    return this.score$.value.user >= TARGET_SCORE;
+  }
+
+  public get isComputerWinner(): boolean {
+    return this.score$.value.computer >= TARGET_SCORE;
   }
 
   public setComputerWinnerForPendingPlates(): void {

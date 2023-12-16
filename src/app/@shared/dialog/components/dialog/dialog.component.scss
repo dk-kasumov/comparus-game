@@ -1,0 +1,33 @@
+@import "variables";
+@import "mixins";
+
+.overlay {
+  @include flex(center, center);
+
+  position: fixed;
+  inset: 0;
+  flex-direction: column;
+  background: $background-9;
+}
+
+.dialog {
+  display: flex;
+  flex-direction: column;
+  min-width: 450px;
+  padding: 15px;
+  background-color: $background-3;
+  border-radius: $border-radius-3;
+  box-shadow: $box-shadow-3;
+
+  &__title {
+    @include text(36px, 400, 42px);
+
+    margin: 0 0 30px;
+  }
+
+  &__footer {
+    @include flex(center, flex-end);
+
+    gap: 0 10px;
+  }
+}

@@ -1,6 +1,6 @@
 @import 'variables';
 
-*, *:before, *:after {
+*, *::before, *::after {
   box-sizing: border-box;
   font-family: $font-family-1, sans-serif;
 }
@@ -12,52 +12,52 @@ body, html {
 }
 
 button {
-  background: none;
   padding: 0;
-  box-shadow: none;
+  background: none;
   border: none;
   border-radius: 0;
+  box-shadow: none;
 }
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
   margin: 0;
+  appearance: none;
 }
 
-input[type=number] {
-  -moz-appearance: textfield;
+input[type="number"] {
+  appearance: textfield;
 }
 
-input[type=number], input[type=text], input[type=password] {
-  border-radius: $border-radius-2;
-  box-shadow: none;
-  border: 1px solid $border-color-2;
+input[type="number"], input[type="text"], input[type="password"] {
   height: 44px;
+  padding: 0 7px;
   color: $text-color-2;
   background: $background-3;
+  border: 1px solid $border-color-2;
+  border-radius: $border-radius-2;
+  box-shadow: none;
   transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
   appearance: none;
-  padding: 0 7px;
 
 
   &:enabled:focus {
+    border-color: $border-color-3;
     outline: 0 none;
     outline-offset: 0;
     box-shadow: $box-shadow-1;
-    border-color: $border-color-3;
   }
 }
 
 .base-button {
-  background: $background-5;
-  color: $text-color-1;
-  border-color: $border-color-4;
   padding: 7px 10px;
+  color: $text-color-1;
   font-size: 16px;
+  background: $background-5;
+  border: 1px solid $border-color-4;
+  border-radius: $border-radius-2;
   cursor: pointer;
   transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
-  border-radius: $border-radius-2;
 
   &:not(:disabled):hover {
     color: $text-color-1;

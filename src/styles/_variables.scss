@@ -1,6 +1,7 @@
 // border radii
 $border-radius-1: 8px;
 $border-radius-2: 6px;
+$border-radius-3: 12px;
 
 // border colors
 $border-color-1: #eee;
@@ -10,17 +11,19 @@ $border-color-4: #2563eb;
 
 // box shadows
 $box-shadow-1: 0 0 0 2px #BFDBFE;
-$box-shadow-2: 0 0 0 2px #ffffff, 0 0 0 4px #9dc1fb, 0 1px 2px 0 black;
+$box-shadow-2: 0 0 0 2px #fff, 0 0 0 4px #9dc1fb, 0 1px 2px 0 black;
+$box-shadow-3: 0 14px 28px rgb(0 0 0 / 25%), 0 10px 10px rgb(0 0 0 / 22%);
 
 // backgrounds
 $background-1: #3559E0;
 $background-2: #161A30;
-$background-3: #ffffff;
+$background-3: #fff;
 $background-4: #3B82F6;
 $background-5: #2563eb;
 $background-6: #FD8D14;
 $background-7: #F31559;
 $background-8: #A2FF86;
+$background-9: rgb(0 0 0 / 70%);
 
 // colors
 $text-color-1: #fff;
@@ -28,5 +31,5 @@ $text-color-2: #4b5563;
 $text-color-3: #B31312;
 
 // font families
-$font-family-1: Preahvihear;
+$font-family-1: preahvihear;
 
