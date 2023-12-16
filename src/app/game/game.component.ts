@@ -82,7 +82,7 @@ export class GameComponent implements OnInit {
   }
 
   public onUserActivatePlate(plate: Plate): void {
-    this.gameService.activatePlateByUser(plate);
+    this.gameService.setWinnerForPlate(plate, WinnerEnum.USER);
 
     if (this.gameService.isWinnerExists) return;
 

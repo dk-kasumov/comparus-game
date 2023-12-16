@@ -34,9 +34,7 @@ export class GameService {
   private generatePlates(): Plate[] {
     return Array(TOTAL_PLATES)
       .fill(null)
-      .map((_, index) => {
-        return new Plate(index, null);
-      });
+      .map((_, index) => new Plate(index, null));
   }
 
   public setComputerWinnerForPendingPlates(): void {
@@ -54,15 +52,15 @@ export class GameService {
     this._plates$.next(platesCopy);
   }
 
-  public activatePlateByUser(plate: Plate): void {
+  public setWinnerForPlate(plate: Plate, winner: WinnerEnum): void {
     const platesCopy = structuredClone(this._plates$.value);
-    platesCopy.splice(plate.id, 1, {...plate, winner: WinnerEnum.USER});
+    const scoreCopy = structuredClone(this._score$.value);
 
-    const score = structuredClone(this._score$.value);
-    score.user += 1;
+    platesCopy.splice(plate.id, 1, {...plate, winner});
+    scoreCopy.user += 1;
 
     this._plates$.next(platesCopy);
-    this._score$.next(score);
+    this._score$.next(scoreCopy);
   }
 
   public activateRandomPlate(): void {
