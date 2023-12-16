@@ -3,16 +3,13 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 
 import {TARGET_SCORE, TOTAL_PLATES} from '@/app/@constants/common.constants';
-import {Plate, WinnerEnum} from '@/app/@models/game.models';
+import {Plate, Score, WinnerEnum} from '@/app/@models/game.models';
 import {getRandomNumber} from '@/app/@utils/numbers/get-random-number.util';
 
 @Injectable()
 export class GameService {
   private readonly _plates$: BehaviorSubject<Plate[]> = new BehaviorSubject(this.generatePlates());
-  private readonly _score$: BehaviorSubject<Record<'user' | 'computer', number>> = new BehaviorSubject({
-    user: 0,
-    computer: 0
-  });
+  private readonly _score$: BehaviorSubject<Score> = new BehaviorSubject(new Score(0, 0));
 
   public readonly plates$ = this._plates$.asObservable();
   public readonly score$ = this._score$.asObservable();
@@ -31,7 +28,7 @@ export class GameService {
 
   public resetState(): void {
     this._plates$.next(this.generatePlates());
-    this._score$.next({user: 0, computer: 0});
+    this._score$.next(new Score(0, 0));
   }
 
   private generatePlates(): Plate[] {
