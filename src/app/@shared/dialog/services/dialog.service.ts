@@ -39,7 +39,7 @@ export class DialogService {
     const dialogRef = new DialogRef();
     map.set(DialogRef, dialogRef);
 
-    dialogRef.afterClosed.pipe(first()).subscribe(() => {
+    dialogRef.afterClosed$.pipe(first()).subscribe(() => {
       this.removeDialogComponentFromBody();
     });
 
