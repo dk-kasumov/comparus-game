@@ -106,8 +106,11 @@ export class GameComponent implements OnInit {
     this.intervalSub = interval(this.currentInterval)
       .pipe(startWith(0), takeUntilDestroyed(this.destroyRef))
       .subscribe(() => {
-        this.gameService.setComputerWinnerOfPendingPlates();
-        this.gameService.activateRandomPlate();
+        this.gameService.setComputerWinnerForPendingPlates();
+
+        if (!this.gameService.isWinnerExists) {
+          this.gameService.activateRandomPlate();
+        }
       });
   }
 
