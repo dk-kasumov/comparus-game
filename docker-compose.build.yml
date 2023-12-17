@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  website:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: comparus-test-task-website
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    networks:
+      - comparus-test-task-network
+
+
+networks:
+  comparus-test-task-network:
+    driver: bridge
