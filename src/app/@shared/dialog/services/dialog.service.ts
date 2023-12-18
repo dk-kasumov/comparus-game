@@ -1,8 +1,9 @@
 import {
   ApplicationRef,
-  ComponentFactoryResolver,
   ComponentRef,
+  createComponent,
   EmbeddedViewRef,
+  EnvironmentInjector,
   inject,
   Injectable,
   Injector,
@@ -18,9 +19,9 @@ import {DialogInjector} from '@/app/@shared/dialog/injectors/dialog.injector';
 
 @Injectable()
 export class DialogService {
-  private readonly componentFactoryResolver = inject(ComponentFactoryResolver);
   private readonly appRef = inject(ApplicationRef);
   private readonly injector = inject(Injector);
+  private readonly environmentInjector = inject(EnvironmentInjector);
 
   public dialogComponentRef!: ComponentRef<DialogComponent>;
 
@@ -43,8 +44,10 @@ export class DialogService {
       this.removeDialogComponentFromBody();
     });
 
-    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(DialogComponent);
-    const componentRef = componentFactory.create(new DialogInjector(this.injector, map));
+    const componentRef = createComponent(DialogComponent, {
+      environmentInjector: this.environmentInjector,
+      elementInjector: new DialogInjector(this.injector, map)
+    });
 
     this.appRef.attachView(componentRef.hostView);
 
